@@ -1,0 +1,19 @@
+html {
+    height: 100vh;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+}
+
+.ina-nav-bar {
+    height: 50px;
+    background-color: black;
+}
+
+.ina-nav-link {
+    color: white;
+    
+}

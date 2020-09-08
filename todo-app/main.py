@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, WebSocket, BackgroundTasks
+from fastapi import FastAPI, Depends, WebSocket, BackgroundTasks, Request
 
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -42,27 +42,8 @@ def shutdown():
 
 
 @app.get('/', response_class=HTMLResponse)
-def root(settings: config.Settings = Depends (get_settings)):
-    response = '''
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="todo">
-    <meta name="author" content="shpal2000">
-
-    <title>todo</title>
-
-  </head>
-
-  <body>
-    <h1>hello todo</h1>
-    <script src="{{ url_for('static', path='/js/jquery-3.3.1.slim.min.js') }}"></script>
-  </body>
-</html>
-     '''
-    return HTMLResponse(content=response, status_code=200)
+def root(request: Request, settings: config.Settings = Depends (get_settings)):
+    return templates.TemplateResponse("base.html", {"request" : request, "id" : 10})
 
 class NewUser(BaseModel):
     user_name: str

@@ -45,6 +45,11 @@ def shutdown():
 def root(request: Request, settings: config.Settings = Depends (get_settings)):
     return templates.TemplateResponse("base.html", {"request" : request, "id" : 10})
 
+@app.get('/signup', response_class=HTMLResponse)
+def root(request: Request, settings: config.Settings = Depends (get_settings)):
+    return templates.TemplateResponse("signup.html", {"request" : request, "id" : 10})
+
+
 class NewUser(BaseModel):
     user_name: str
     user_pass: str

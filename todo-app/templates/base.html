@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>todo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -9,68 +10,44 @@
   </head>
 
   <body>
-    <nav class="navbar has-shadow">
+    <nav class="navbar has-shadow is-info">
       <div class="navbar-brand" >
         <a class="navbar-item">
-          <i class="fa fa-tasks"></i> &nbsp; <i class="fa fa-check-circle"></i> 
+          <i class="fa fa-list"></i> &nbsp; <i class="fa fa-check-circle"></i> 
         </a>
-
         <div class="navbar-burger">
           <span></span>
           <span></span>
           <span></span>
         </div>
+      </div>
 
-        <div class="navbar-menu">
-          <div class="navbar-start">
-            <div class="navbar-item">
-              <small>Publishing at the speed of technology</small>
+      <div class="navbar-menu" >
+
+        <div class="navbar-start">
+          <div class="navbar-item">
+            <small>Greetings TODO!</small>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary" href="/signup">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light">
+                Log in
+              </a>
             </div>
           </div>
-
-          <div class="navbar-end">
-            <div class="navbar-item has-dropdown is-hoverable">
-              <div class="navbar-link">
-                Alex Johnson
-              </div>
-              <div class="navbar-dropdown ">
-
-                <a class="navbar-item">
-                  <div>
-                    <span class="icon is-small">
-                      <i class="fa fa-user-circle-o"></i>
-                    </span>
-                    Profile
-                  </div>
-                </a>
-                <a class="navbar-item">
-                  <div>
-                    <span class="icon is-small">
-                      <i class="fa fa-bug"></i>
-                    </span>
-                    Report bug
-                  </div>
-                </a>
-                <a class="navbar-item">
-                  <div>
-                    <span class="icon is-small">
-                      <i class="fa fa-sign-out"></i>
-                    </span>
-                    Sign Out
-                  </div>
-                </a>
-
-              </div>
-            </div>
-          </div>
-
         </div>
 
       </div>
-      <div class="navbar-menu" >
-      </div>
     </nav>
 
+    {% block content %}{% endblock %}
+    
     <script src="{{ url_for('static', path='/js/jquery-3.5.1.min.js') }}"></script>
   </body>
 </html>

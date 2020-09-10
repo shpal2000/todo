@@ -1,4 +1,6 @@
-from fastapi import FastAPI, Depends, WebSocket, BackgroundTasks, Request
+from fastapi import FastAPI, Depends, WebSocket
+from fastapi import BackgroundTasks, Request
+from fastapi import Form
 
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -16,6 +18,7 @@ import config
 
 from fastapi.responses import ORJSONResponse
 from fastapi.responses import HTMLResponse
+from fastapi.responses import RedirectResponse
 
 
 app = FastAPI()
@@ -43,29 +46,26 @@ def shutdown():
 
 @app.get('/', response_class=HTMLResponse)
 def root(request: Request, settings: config.Settings = Depends (get_settings)):
-    return templates.TemplateResponse("base.html", {"request" : request, "id" : 10})
+    return templates.TemplateResponse("base.html", {"request" : request})
 
-@app.get('/signup', response_class=HTMLResponse)
-def root(request: Request, settings: config.Settings = Depends (get_settings)):
-    return templates.TemplateResponse("signup.html", {"request" : request, "id" : 10})
+@app.get('/signup/', response_class=HTMLResponse)
+def signup(request: Request, settings: config.Settings = Depends (get_settings)):
+    return templates.TemplateResponse("signup.html", {"request" : request})
+
+@app.get('/signup_welcome/{user_name}', response_class=HTMLResponse)
+def signup_welcome(user_name: str, request: Request, settings: config.Settings = Depends (get_settings)):
+    return templates.TemplateResponse("base.html", {"request" : request})
 
 
-class NewUser(BaseModel):
-    user_name: str
-    user_pass: str
-    full_name: str
-    primary_email: str
-    primary_phone: str
-
-@app.post('/add_user', response_class=ORJSONResponse)
-async def add_user(params : NewUser
+@app.post('/signup_action', response_class=RedirectResponse)
+async def signup_action(user_name: str = Form (...)
+                    , user_pass: str = Form (...)
+                    , user_email: str = Form (...)
                     , settings: config.Settings = Depends (get_settings)):
 
-    crud.add_user(settings.db_file, 
-                  params.user_name,
-                  params.user_pass,
-                  params.full_name,
-                  params.primary_email,
-                  params.primary_phone)
+    crud.add_user(settings.db_file
+                  , user_name_value = user_name
+                  , user_pass_value = user_pass
+                  , primary_email_value = user_email)
 
-    return params
+    return RedirectResponse (url='/signup_welcome/{}'.format(user_name), status_code=302)

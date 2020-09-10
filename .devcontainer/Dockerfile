@@ -67,6 +67,6 @@ RUN apt-get update \
     && apt-get autoremove -yq \
     && apt-get clean -yq \
     && rm -rf /var/lib/apt/lists/* 
-RUN pip3 install fastapi uvicorn orjson python-dotenv requests pytest aiofiles jinja2
+RUN pip3 install fastapi uvicorn orjson python-dotenv requests pytest aiofiles jinja2 python-multipart
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=

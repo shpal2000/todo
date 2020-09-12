@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="hero is-white">
+<section class="hero is-dark">
     <div class="hero-body">
       <div class="container">
         <div class="columns">
             <div class="column"></div>
-            <div class="column">
-                <form class="box" action="/signup_submit" method="POST">
-                  <div class="field">
+          <div class="column is-two-fifths">
+            <form class="box" action="/signup_submit" method="POST">
+
+                <div class="field">
                     <label class="label">Username</label>
                     <div class="control">
                       <input class="input" type="text" placeholder="" name="user_name">
@@ -31,17 +32,23 @@
                   
                   <div class="field">
                     <div class="control">
-                      <button class="button is-link">Create account</button>
+                      <button class="button is-link">Sign up for TODO!</button>
                     </div>
                   </div>
-                </form>
-            </div>
-            <div class="column"></div>
+
+                  <div>
+                    <p>
+                      By clicking "Sign up for TODO!", you agree to our terms of Service and Privacy Statement. We will occasionally send you account related emails.
+                    </p>
+                  </div>
+
+
+            </form>
+          </div>
         </div>
       </div>
     </div>
 
 </section>
-
 
 {% endblock %}

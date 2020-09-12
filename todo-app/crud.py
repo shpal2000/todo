@@ -4,15 +4,15 @@ def create_tables(db_file):
     conn = sqlite3.connect(db_file)
     c = conn.cursor()
 
-    # c.execute (''' DROP TABLE IF EXISTS user''')
+    c.execute (''' DROP TABLE IF EXISTS user''')
 
-    # c.execute (''' CREATE TABLE user
-    #                     (user_name text PRIMARY KEY, 
-    #                     user_pass text NOT NULL,
-    #                     full_name text,
-    #                     primary_email text NOT NULL,
-    #                     primary_phone text
-    #                     )''')
+    c.execute (''' CREATE TABLE user
+                        (user_name text PRIMARY KEY, 
+                        user_pass text NOT NULL,
+                        full_name text,
+                        primary_email text NOT NULL UNIQUE,
+                        primary_phone text
+                        )''')
                         
     conn.commit()
     conn.close()

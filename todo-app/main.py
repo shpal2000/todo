@@ -31,7 +31,7 @@ templates = Jinja2Templates(directory="templates")
 @lru_cache
 def get_settings():
     settings = config.Settings()
-    crud.create_tables (settings.db_file)
+    # crud.create_tables (settings.db_file)
     return settings
 
 @app.on_event("startup")
@@ -46,19 +46,22 @@ def shutdown():
 
 @app.get('/', response_class=HTMLResponse)
 def root(request: Request, settings: config.Settings = Depends (get_settings)):
-    return templates.TemplateResponse("base.html", {"request" : request})
+    return templates.TemplateResponse("index.html", {"request" : request})
 
 @app.get('/signup/', response_class=HTMLResponse)
 def signup(request: Request, settings: config.Settings = Depends (get_settings)):
     return templates.TemplateResponse("signup.html", {"request" : request})
 
+@app.get('/signin/', response_class=HTMLResponse)
+def signin(request: Request, settings: config.Settings = Depends (get_settings)):
+    return templates.TemplateResponse("signin.html", {"request" : request})
+
 @app.get('/signup_welcome/{user_name}', response_class=HTMLResponse)
 def signup_welcome(user_name: str, request: Request, settings: config.Settings = Depends (get_settings)):
     return templates.TemplateResponse("base.html", {"request" : request})
 
-
-@app.post('/signup_action', response_class=RedirectResponse)
-async def signup_action(user_name: str = Form (...)
+@app.post('/signup_submit', response_class=RedirectResponse)
+async def signup_submit(user_name: str = Form (...)
                     , user_pass: str = Form (...)
                     , user_email: str = Form (...)
                     , settings: config.Settings = Depends (get_settings)):

@@ -56,9 +56,9 @@ def signup(request: Request, settings: config.Settings = Depends (get_settings))
 def signin(request: Request, settings: config.Settings = Depends (get_settings)):
     return templates.TemplateResponse("signin.html", {"request" : request})
 
-@app.get('/signup_welcome/{user_name}', response_class=HTMLResponse)
-def signup_welcome(user_name: str, request: Request, settings: config.Settings = Depends (get_settings)):
-    return templates.TemplateResponse("base.html", {"request" : request})
+@app.get('/user/{user_name}', response_class=HTMLResponse)
+def user(user_name: str, request: Request, settings: config.Settings = Depends (get_settings)):
+    return templates.TemplateResponse("user.html", {"request" : request, "user" : user_name})
 
 @app.post('/signup_submit', response_class=RedirectResponse)
 async def signup_submit(user_name: str = Form (...)
@@ -71,4 +71,4 @@ async def signup_submit(user_name: str = Form (...)
                   , user_pass_value = user_pass
                   , primary_email_value = user_email)
 
-    return RedirectResponse (url='/signup_welcome/{}'.format(user_name), status_code=302)
+    return RedirectResponse (url='/user/{}'.format(user_name), status_code=302)

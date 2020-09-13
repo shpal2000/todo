@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section >
+    <div class="container">
+        <div class="columns">
+            <div class="column"></div>
+          <div class="column is-two-fifths">
+            <form class="box" action="/signup_submit" method="POST">
+
+                <div class="field">
+                    <label class="label">Todo name</label>
+                    <div class="control">
+                      <input class="input" type="text" placeholder="" name="todo_name">
+                    </div>
+                  </div>
+                                    
+                  <div class="field">
+                    <label class="label">Due date</label>
+                    <div class="control">
+                      <input class="input " type="text" placeholder="" name="todo_time">
+                    </div>
+                  </div>
+                  
+                  <div class="field">
+                    <label class="label">Description</label>
+                    <div class="control">
+                      <input class="input" type="text" placeholder="" name="todo_description">
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <label class="label">Notify</label>
+                    <div class="control">
+                      <input class="input" type="text" placeholder="" name="todo_alert">
+                    </div>
+                  </div>
+
+
+                  <div class="field">
+                    <label class="label">Circle</label>
+                    <div class="control">
+                      <input class="input" type="text" placeholder="" name="todo_circle">
+                    </div>
+                  </div>
+                  
+
+                  <div class="field">
+                    <div class="control">
+                      <button class="button is-link"> Add </button>
+                    </div>
+                  </div>
+
+            </form>
+          </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
